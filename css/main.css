@@ -1,0 +1,148 @@
+head, body, button, p {
+    all:unset;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+}
+/* ---main divs--- */
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 20%;
+    background-color: #a4a8d1;
+}
+.todo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    width: 40%;
+    background-color: #a4bfeb;
+}
+.inProgress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    width: 40%;
+    background-color: #8cabbe;
+}
+/* ---------------- */
+/* --buttons--- */
+.MenuButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+    width: 75%;
+    background-color: #a4a8d1;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #000000;
+    cursor: pointer;
+    margin: 10%;
+    transition: all 0.5s ease-in-out;
+}
+.MenuButton:hover {
+    background-color: #000000;
+    color: #ffffff;
+    width: 65%;
+    height: 8vh;
+    border-radius: 15px;
+    font-size: 1.25em;
+}
+.taskButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 10%;
+    width: 35%;
+    background-color: #a4eaeb;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #000000;
+    cursor: pointer;
+    margin: 2.5%;
+    transition: all 0.5s ease-in-out;
+}
+.taskButton:hover {
+    background-color: #000000;
+    color: #ffffff;
+    width: 35%;
+    height: 15%;
+    border-radius: 15px;
+    font-size: 1.15em;
+}
+.taskButton.removeButton {
+    background-color: #e8a4a4;
+}
+/* -------------------- */
+.task {
+    background-color: rgb(201, 221, 238);
+    width: 80%;
+    height: 25%;
+    border: 1.75px solid #000000;
+    border-radius: 20px;
+    margin: 3%;
+    padding: 1.5%;
+}
+.task_finish {
+    background-color: rgb(201, 221, 238);
+    width: 80%;
+    height: 25%;
+    border: 1.75px solid #000000;
+    border-radius: 20px;
+    margin: 3%;
+    padding: .5%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.taskTitle {
+    font-size: 1.85em;
+    font-weight: bold;
+    margin: 1.25%;
+}
+.addTask {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 25%;
+    width: 80%;
+    background-color: #a4eaeb;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #000000;
+    cursor: pointer;
+    margin: 2.5%;
+    overflow: hidden;
+    max-height: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+.addTask.show {
+    max-height: 25%;
+    border: 1px solid #000000;
+}
+.addTask input {
+    width: 41%;
+    height: 5%;
+}
