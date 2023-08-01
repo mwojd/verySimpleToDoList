@@ -167,10 +167,13 @@ head, body, button, p {
     margin: 1.25%;
     text-shadow: 2px 2px .5px #9be3ff;
   
+    /* Make the font size responsive */
     @media (max-width: 768px) {
       font-size: 2em;
     }
+  
+    /* Make the font size responsive using vw units */
     @media (max-width: 480px) {
-      margin: 0.75%;
+      font-size: 1.15em;
     }
   }
