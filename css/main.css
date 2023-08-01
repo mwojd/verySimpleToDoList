@@ -166,4 +166,11 @@ head, body, button, p {
     font-weight: bold;
     margin: 1.25%;
     text-shadow: 2px 2px .5px #9be3ff;
-}
+  
+    @media (max-width: 768px) {
+      font-size: 2em;
+    }
+    @media (max-width: 480px) {
+      margin: 0.75%;
+    }
+  }
