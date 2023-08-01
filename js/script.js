@@ -66,6 +66,26 @@ function clearAll() {//removes all tasks from the arrays
     taskImportance = [];
     renderTasks();
 }
+function clearFinished() {//removes all finished tasks from the arrays
+    for (var i=0;i<task.length;i++) {
+        if (task[i][5] === true) {
+            task.splice(i, 1); // Remove task from the task array
+            // Update taskImportance array after removing the task
+            taskImportance = taskImportance.filter((item) => item[2] !== i);
+            i--;
+        }
+    }
+    renderTasks();
+    
+}
+function showConfirmClear(button) {
+    confirmClear = document.getElementById("confirmClear");
+    if(!confirmClear.classList.contains("show")) {
+        confirmClear.classList.add("show");
+    } else {
+        confirmClear.classList.remove("show");
+    }
+}
 function beginTask(taskIndex) {
     task[taskIndex][3] = true; // Set is begun to true
     task[taskIndex][4] = new Date().toLocaleDateString(); // Set task began from date to current date
@@ -169,9 +189,18 @@ document.addEventListener("click", (e) => {
         }
     }
     //-------------------------------------------
-    //-----------------clear all-----------------
-    if(e.target.id === "clear")
+    //-----------------clear-----------------
+    if(e.target.id === "clear") {//all
         clearAll();
+        showConfirmClear();
+    }
+    if(e.target.id == "clearFinished") {
+        clearFinished();
+        showConfirmClear(e);
+    }
+    if(e.target.id == "confirmClear") {
+        saveTasks();
+    }
     //-------------------------------------------
 });
 window.onload = () => {loadTasks(); renderTasks();};

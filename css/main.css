@@ -6,6 +6,9 @@ head, body, button, p {
     flex-direction: row;
     height: 100vh;
     width: 100vw;
+    font-family: 'Roboto', sans-serif;
+    font-size: .7rem;
+    overflow: hidden;
 }
 /* ---main divs--- */
 .menu {
@@ -37,7 +40,7 @@ head, body, button, p {
 }
 /* ---------------- */
 /* --buttons--- */
-.MenuButton {
+.MenuButton, .ConfirmClear {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -54,7 +57,7 @@ head, body, button, p {
     margin: 10%;
     transition: all 0.5s ease-in-out;
 }
-.MenuButton:hover {
+.MenuButton:hover, .ConfirmClear:hover{
     background-color: #000000;
     color: #ffffff;
     width: 65%;
@@ -137,12 +140,24 @@ head, body, button, p {
     max-height: 0;
     transition: all 0.5s ease-in-out;
 }
-
 .addTask.show {
     max-height: 25%;
     border: 1px solid #000000;
 }
+
 .addTask input {
     width: 41%;
     height: 5%;
+}
+.ConfirmClear {
+    border: none;
+    max-height: 0;
+    height: 0;
+    font-size: 0;
+}
+.ConfirmClear.show {
+    max-height: 10vh;
+    height: 10vh;
+    border: 1px solid #000000;
+    font-size: 1.5em;
 }
