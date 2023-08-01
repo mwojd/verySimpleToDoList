@@ -101,8 +101,8 @@ function endTask(taskIndex) {
 }
 function renderTasks() {
     sortByImportance();
-    todoList.innerHTML = "<h1>ToDo</h1>";
-    inProgressList.innerHTML = "<h1>In Progress/Completed</h1>";
+    todoList.innerHTML = '<span class="catTitle">ToDo</span>';
+    inProgressList.innerHTML = '<span class="catTitle">In Progress/Completed</span>';
     for (var i = 0; i < taskImportance.length; i++) {
         const taskIndex = taskImportance[i][2];
         if (task[taskIndex][3] === false) {
