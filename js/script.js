@@ -1,4 +1,5 @@
 var task = [
+    //order of array:
     //name,Due date, Task importance, is begun, task began from date,is finished, finished date
 ]
 var taskImportance = [//tasks sorted by importance
@@ -13,6 +14,7 @@ var taskImportance = [//tasks sorted by importance
     //task name, Task importance, task index corresponding to task array
 ]
 var importance = [
+    //importance number to string for nicer view
     "Optional",
     "Should be done but isn't necessary",
     "Average",
@@ -20,12 +22,16 @@ var importance = [
     "Very important",
     "Urgent/Must be done without delay"
 ]
+//selects all elements with class todo
 const todoList = document.querySelector(".todo");
+//selects all elements with class inProgress
 const inProgressList = document.querySelector(".inProgress");
+//sorts the taskImportance array by importance
 function sortByImportance() {
     taskImportance.sort((a, b) => b[1] - a[1]);
 }
-function addTask() {//adds the task to to arrays! DOES NOT ADD IN VIEWPORT
+//adds the task to to arrays! DOES NOT ADD IN VIEWPORT
+function addTask() {
     const taskNameInput = document.getElementById("taskName");
     const taskDueDateInput = document.getElementById("taskDueDate");
     const taskWeightInput = document.getElementById("taskWeight");
@@ -36,6 +42,7 @@ function addTask() {//adds the task to to arrays! DOES NOT ADD IN VIEWPORT
         return;
     }
 
+    //get the taskName, taskDueDate and taskWeight from the form
     const taskName = taskNameInput.value;
     const dueDate = taskDueDateInput.value;
     const taskWeight = parseInt(taskWeightInput.value);
@@ -46,7 +53,7 @@ function addTask() {//adds the task to to arrays! DOES NOT ADD IN VIEWPORT
     // Add the task to the taskImportance array
     taskImportance.push([taskName, taskWeight, task.length - 1]);
 
-    // Clear the form inputs
+    // Clear the form inputs, sort by value and save tasks
     taskNameInput.value = "";
     taskDueDateInput.value = "";
     taskWeightInput.value = "";
@@ -54,6 +61,7 @@ function addTask() {//adds the task to to arrays! DOES NOT ADD IN VIEWPORT
     saveTasks();
     return 0; //success
 }
+//removes a specific task from arrays by index
 function removeTask(taskIndex) {
     task.splice(taskIndex, 1); // Remove task from the task array
     // Update taskImportance array after removing the task
@@ -61,14 +69,16 @@ function removeTask(taskIndex) {
     renderTasks();
     saveTasks();
 }
-function clearAll() {//removes all tasks from the arrays
+//removes all tasks from the arrays
+function clearAll() {
     task = [];
     taskImportance = [];
     renderTasks();
 }
-function clearFinished() {//removes all finished tasks from the arrays
+//removes all finished tasks from the arrays
+function clearFinished() {
     for (var i=0;i<task.length;i++) {
-        if (task[i][5] === true) {
+        if (task[i][5] === true) {//if task is finished
             task.splice(i, 1); // Remove task from the task array
             // Update taskImportance array after removing the task
             taskImportance = taskImportance.filter((item) => item[2] !== i);
@@ -78,7 +88,8 @@ function clearFinished() {//removes all finished tasks from the arrays
     renderTasks();
     
 }
-function showConfirmClear(button) {
+//when either of clear buttons are clicked ask for confirmation
+function showConfirmClear() {
     confirmClear = document.getElementById("confirmClear");
     if(!confirmClear.classList.contains("show")) {
         confirmClear.classList.add("show");
@@ -86,12 +97,14 @@ function showConfirmClear(button) {
         confirmClear.classList.remove("show");
     }
 }
+//sets the todo task to task in progress
 function beginTask(taskIndex) {
     task[taskIndex][3] = true; // Set is begun to true
     task[taskIndex][4] = new Date().toLocaleDateString(); // Set task began from date to current date
     renderTasks();
     saveTasks();
 }
+//ends a task
 function endTask(taskIndex) {
     task[taskIndex][3] = false; // Set is begun to false
     task[taskIndex][5] = true; // Set is finished to true
@@ -99,14 +112,15 @@ function endTask(taskIndex) {
     renderTasks();
     saveTasks();
 }
+//renders the task on the website
 function renderTasks() {
-    sortByImportance();
-    todoList.innerHTML = '<span class="catTitle">ToDo</span>';
-    inProgressList.innerHTML = '<span class="catTitle">In Progress/Completed</span>';
-    for (var i = 0; i < taskImportance.length; i++) {
-        const taskIndex = taskImportance[i][2];
-        if (task[taskIndex][3] === false) {
-            if (task[taskIndex][5] === false) {
+    sortByImportance();//update importance array
+    todoList.innerHTML = '<span class="catTitle">ToDo</span>';//clear the todo list
+    inProgressList.innerHTML = '<span class="catTitle">In Progress/Completed</span>'; //clear the in progress/compleated list
+    for (var i = 0; i < taskImportance.length; i++) {//for each task
+        const taskIndex = taskImportance[i][2];//get the task index
+        if (task[taskIndex][3] === false) { //if task is not started
+            if (task[taskIndex][5] === false) { //if task is not finished
                 todoList.innerHTML += `
                     <div class="task">
                         <p class="taskTitle">${task[taskIndex][0]}</p> <br>
@@ -115,10 +129,9 @@ function renderTasks() {
                         <button class="taskButton" onclick="beginTask(${taskIndex})">Begin</button>
                         <button class="taskButton removeButton" onclick="removeTask(${taskIndex})">Remove</button>
                     </div>`;//render not started task
-            } else {
+            } else { //if task is finished
                 inProgressList.innerHTML += `
                 <div class="task_finish">
-                <!-- this is a placeholder later to be in js -->
                 <p class="taskTitle">${task[taskIndex][0]}</p> <br>
                 Due Date:${task[taskIndex][1]} <br>
                 Started Date:${task[taskIndex][4]} <br>
@@ -126,7 +139,7 @@ function renderTasks() {
                 Took days:${Math.floor((new Date(task[taskIndex][6]) - new Date(task[taskIndex][4])) / (1000 * 60 * 60 * 24))} <br>
                 </div>`; // Render ended task
             }
-        } else {
+        } else {//if task is started
             inProgressList.innerHTML += `
             <div class="task">
                 <p class="taskTitle">${task[taskIndex][0]}</p> <br>
@@ -139,31 +152,32 @@ function renderTasks() {
         }
     }
 }
-const cookieVal = document.cookie;
+//saves all tasks to local storage
 function saveTasks() {
-    const taskArrayString = JSON.stringify(task);
-    const taskImportanceString = JSON.stringify(taskImportance);
-    localStorage.setItem('task', taskArrayString);
-    localStorage.setItem('taskImportance', taskImportanceString);
-    console.log("Saved tasks to localStorage.");
+    const taskArrayString = JSON.stringify(task); // Convert task array to string
+    const taskImportanceString = JSON.stringify(taskImportance); // Convert taskImportance array to string
+    localStorage.setItem('task', taskArrayString);// Save task array to localStorage
+    localStorage.setItem('taskImportance', taskImportanceString);// Save taskImportance array to localStorage
+    console.log("Saved tasks to localStorage.");//log confirmation
 }
-
+//loads task from storage
 function loadTasks() {
-    const taskArrayString = localStorage.getItem('task');
-    const taskImportanceString = localStorage.getItem('taskImportance');
+    const taskArrayString = localStorage.getItem('task');// Get task array from localStorage
+    const taskImportanceString = localStorage.getItem('taskImportance');// Get taskImportance array from localStorage
 
-    if (taskArrayString && taskImportanceString) {
-        task = JSON.parse(taskArrayString);
-        taskImportance = JSON.parse(taskImportanceString);
-        console.log("Loaded tasks from localStorage.");
-    } else {
-        console.log("No tasks found in localStorage.");
+    if (taskArrayString && taskImportanceString) {//if tasks are found
+        task = JSON.parse(taskArrayString);// Convert task array string to array
+        taskImportance = JSON.parse(taskImportanceString);// Convert taskImportance array string to array
+        console.log("Loaded tasks from localStorage.");//log confirmation
+    } else {//if no tasks are found
+        console.log("No tasks found in localStorage.");//log no tasks found
     }
 }
+//when a button is clicked
 document.addEventListener("click", (e) => {
     const addTaskForm = document.querySelector(".addTask");
     //-----------------add task-----------------
-    if (e.target.id === "add") {
+    if (e.target.id === "add") {//if the task button is clicked then show the add task form
         if (!addTaskForm.classList.contains("show")) {
             document.getElementById("add").innerHTML = "Cancel";
             addTaskForm.classList.add("show");
@@ -172,7 +186,7 @@ document.addEventListener("click", (e) => {
             addTaskForm.classList.remove("show");
         }
     }
-    if (e.target.id === "addTaskButton") {
+    if (e.target.id === "addTaskButton") {//if the add task button is clicked then add the task
         try {
             const result = addTask();
             if (result === 0) {
@@ -190,18 +204,19 @@ document.addEventListener("click", (e) => {
     }
     //-------------------------------------------
     //-----------------clear-----------------
-    if(e.target.id === "clear") {//all
+    if(e.target.id === "clear") {//clear all tasks
         clearAll();
         showConfirmClear();
     }
-    if(e.target.id == "clearFinished") {
+    if(e.target.id == "clearFinished") {//clear all finished tasks
         clearFinished();
-        showConfirmClear(e);
+        showConfirmClear();
     }
-    if(e.target.id == "confirmClear") {
+    if(e.target.id == "confirmClear") {// confirm the clear
         saveTasks();
         location.reload();
     }
     //-------------------------------------------
 });
+//when the page loads load tasks and render tasks
 window.onload = () => {loadTasks(); renderTasks();};

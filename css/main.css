@@ -1,25 +1,33 @@
+/* unset these elements for later styling and avoiding problems */
 head, body, button, p {
     all:unset;
 }
+/* style the main div */
 .container {
     display: flex;
     flex-direction: row;
+    /* set height and width to the users viewport */
     height: 100vh;
     width: 100vw;
+    /* set the font and its size */
     font-family: 'Roboto', sans-serif;
     font-size: .7rem;
+    /* if any overflow occurs then hide it */
     overflow: hidden;
 }
 /* ---main divs--- */
+/* menu for adding,clearing */
 .menu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: flex; /* display the div as a flexbox */
+    flex-direction: column; /* set the flex direction to column */
+    /* center the items in both y and x axis */
+    align-items: center; 
     justify-content: center;
     height: 100vh;
     width: 20%;
     background-color: #a4a8d1;
 }
+/* style the div containing todo tasks */
 .todo {
     display: flex;
     flex-direction: column;
@@ -29,6 +37,7 @@ head, body, button, p {
     width: 40%;
     background-color: #a4bfeb;
 }
+/* style the div for in progress and complete tasks */
 .inProgress {
     display: flex;
     flex-direction: column;
@@ -40,6 +49,7 @@ head, body, button, p {
 }
 /* ---------------- */
 /* --buttons--- */
+/* all buttons in the menu div */
 .MenuButton, .ConfirmClear {
     display: flex;
     flex-direction: row;
@@ -48,15 +58,21 @@ head, body, button, p {
     height: 10vh;
     width: 75%;
     background-color: #a4a8d1;
+    /* gives the buttons a border of 1px widht and of solid texture, with the black colour */
     border: 1px solid #000000;
+    /* border roudness */
     border-radius: 5px;
+    /* font size */
     font-size: 1.5em;
+    /* font style */
     font-weight: bold;
     color: #000000;
+    /* cursor when hovered */
     cursor: pointer;
-    margin: 10%;
-    transition: all 0.5s ease-in-out;
+    margin: 10%; /* margin between the buttons */
+    transition: all 0.5s ease-in-out; /* transition for the hover effect */
 }
+/* when the buttons are hovered over change their styles */
 .MenuButton:hover, .ConfirmClear:hover{
     background-color: #000000;
     color: #ffffff;
@@ -65,6 +81,7 @@ head, body, button, p {
     border-radius: 15px;
     font-size: 1.25em;
 }
+/* the buttons inside tasks */
 .taskButton {
     display: flex;
     flex-direction: row;
@@ -82,6 +99,7 @@ head, body, button, p {
     margin: 2.5%;
     transition: all 0.5s ease-in-out;
 }
+/* when the button is hovered over change its style */
 .taskButton:hover {
     background-color: #000000;
     color: #ffffff;
@@ -90,10 +108,12 @@ head, body, button, p {
     border-radius: 15px;
     font-size: 1.15em;
 }
+/* the button inside tasks that removes them */
 .taskButton.removeButton {
     background-color: #e8a4a4;
 }
 /* -------------------- */
+/* the task */
 .task {
     background-color: rgb(201, 221, 238);
     width: 80%;
@@ -101,8 +121,9 @@ head, body, button, p {
     border: 1.75px solid #000000;
     border-radius: 20px;
     margin: 3%;
-    padding: 1.5%;
+    padding: 1.5%; /* padding between the task title and the buttons */
 }
+/* finished task */
 .task_finish {
     background-color: rgb(201, 221, 238);
     width: 80%;
@@ -116,11 +137,13 @@ head, body, button, p {
     align-items: center;
     justify-content: center;
 }
+/* task title styling */
 .taskTitle {
     font-size: 1.85em;
     font-weight: bold;
     margin: 1.25%;
 }
+/* the button that adds the task */
 .addTask {
     display: flex;
     flex-direction: column;
@@ -129,7 +152,7 @@ head, body, button, p {
     height: 25%;
     width: 80%;
     background-color: #a4eaeb;
-    border: none;
+    border: none; /* remove the border */
     border-radius: 5px;
     font-size: 1em;
     font-weight: bold;
@@ -137,35 +160,39 @@ head, body, button, p {
     cursor: pointer;
     margin: 2.5%;
     overflow: hidden;
-    max-height: 0;
-    transition: all 0.5s ease-in-out;
+    max-height: 0; /* set the max height to 0 so it is hidden */
+    transition: all 0.5s ease-in-out; /* transition for the appear effect */
 }
+/* when the add task button in shown */
 .addTask.show {
-    max-height: 25%;
+    max-height: 25%; /* set the max height to 25% so it is shown */
     border: 1px solid #000000;
 }
-
+/* input inside the task from */
 .addTask input {
     width: 41%;
     height: 5%;
 }
+/* confirm clear button thats hidden */
 .ConfirmClear {
     border: none;
     max-height: 0;
     height: 0;
     font-size: 0;
 }
+/* when the confirm clear is shown */
 .ConfirmClear.show {
     max-height: 10vh;
     height: 10vh;
     border: 1px solid #000000;
     font-size: 1.5em;
 }
+/* category title, todo, in progress/completed */
 .catTitle {
     font-size: 2.5em;
     font-weight: bold;
     margin: 1.25%;
-    text-shadow: 2px 2px .5px #9be3ff;
+    text-shadow: 2px 2px .5px #9be3ff; /* add a shadow to the text */
   
     /* Make the font size responsive */
     @media (max-width: 768px) {

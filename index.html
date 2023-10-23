@@ -1,36 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- utf-8 is the most used character set -->
+    <meta charset="UTF-8"> 
+    <!-- used to tell internet explorer to use the latest engine, for compability -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <!-- used to tell the browser how to render the page on different devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>todolist</title>
     <!-- font roboto light 300 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.css"> <!-- link to the css file -->
 </head>
 <body>
     <div class="container">
         <div class="menu">
+             <!-- this button triggers the action to add a task, turns the div addtask on/off-->
             <button class="MenuButton" id="add">Add Task</button>
-            <div class="addTask">
-                <input type="text" id="taskName" placeholder="Task Name">
-                Due date: <input type="date" id="taskDueDate">
-                <input type="number" id="taskWeight" placeholder="Task Weight 0-5" min="0" max="5">
-                <button class="MenuButton" id="addTaskButton">Add</button>
+            <div class="addTask"> <!-- hidded menu for task details-->
+                <input type="text" id="taskName" placeholder="Task Name"> <!--input for task name-->
+                Due date: <input type="date" id="taskDueDate"> <!-- task deadline-->
+                <input type="number" id="taskWeight" placeholder="Task Weight 0-5" min="0" max="5"> <!-- how important the task it-->
+                <button class="MenuButton" id="addTaskButton">Add</button> <!-- button that adds the task-->
             </div>
-            <button class="MenuButton" id="clear">Clear All</button>
-            <button class="MenuButton" id="clearFinished">Clear Finished</button>
-            <button class="ConfirmClear" id="confirmClear" title="reload website to cancel">Confirm</button>
+            <!--removes all tasks-->
+            <button class="MenuButton" id="clear">Clear All</button> 
+            <!-- removes all finished tasks-->
+            <button class="MenuButton" id="clearFinished">Clear Finished</button> 
+
+            <!--shown when either of the clear buttons is clicked-->
+            <button class="ConfirmClear" id="confirmClear" title="reload website to cancel">Confirm</button> 
         </div>
-        <div class="todo">
-            
+        <div class="todo"><!--all items that are todo, not started-->
+            <!-- 
+                <div class="task"> this is an example not started task, for more look in te script file
+                <p class="taskTitle">${task[taskIndex][0]}</p> <br>
+                Due Date:${task[taskIndex][1]} <br>
+                Importance lvl${task[taskIndex][2]}: ${importance[task[taskIndex][2]]} <br>
+                <button class="taskButton" onclick="beginTask(${taskIndex})">Begin</button>
+                <button class="taskButton removeButton" onclick="removeTask(${taskIndex})">Remove</button>
+            </div>
+        -->
         </div>
+        <!--all items that are in progress or compleated-->
         <div class="inProgress">
-            
+                <!--this is an example of an ended task, more in js
+                <div class="task_finish"><br> 
+                 <p class="taskTitle">${task[taskIndex][0]}</p> 
+                Due Date:${task[taskIndex][1]} <br>
+                Started Date:${task[taskIndex][4]} <br>
+                Finished Date:${task[taskIndex][6]} <br>
+                Took days:${Math.floor((new Date(task[taskIndex][6]) - new Date(task[taskIndex][4])) / (1000 * 60 * 60 * 24))} <br>
+                </div>`
+                -->
+
+                <!--  this is an example of a task in progress, more in js
+                <div class="task">
+                <p class="taskTitle">${task[taskIndex][0]}</p> <br>
+                Due Date:${task[taskIndex][1]} <br>
+                Started Date:${task[taskIndex][4]} <br>
+                Importance lvl${task[taskIndex][2]}: ${importance[task[taskIndex][2]]} <br>
+                <button class="taskButton" onclick="endTask(${taskIndex})">Finish</button>
+                <button class="taskButton removeButton" onclick="removeTask(${taskIndex})">Remove</button>
+                </div>`
+            -->
         </div>
     </div>
     <script src="js/script.js"></script>
